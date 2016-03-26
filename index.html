@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkers</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <style type="text/css">
+  .tableWrapper {
+    margin: 10px 10px 10px 10px;
+    border: 1px solid #d9edf7;
+  }
+  
+  .playBoard {
+    width: 100%;
+  }
+  
+  .playBoard td {
+    background-color: white;
+    empty-cells: show;
+    position: relative;
+  }
+
+  .playBoard tr:nth-child(1) td::after {
+    content: attr(letter-sign);
+    position: absolute;
+    top: -18px;
+    left: 50%;
+  }
+  
+  .playBoard tr td:nth-child(1)::before {
+    content: attr(numeric-sign);
+    position: absolute;
+    left: -17px;
+    top: 40%;
+  }
+
+  .playBoard tr:nth-child(2n+1) td:nth-child(2n),
+  .playBoard tr:nth-child(2n) td:nth-child(2n+1) {
+    background-color: #d9edf7;
+  }
+  
+  
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-info">
+              <div class="panel-heading">Текущий счёт</div>
+              <div class="panel-body" id="prScore">0 : 0</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-md-12">
+            <div class="panel panel-primary" id="player1Panel">
+              <div class="panel-heading">
+                <input type="text" class="form-control" id="player1Name" placeholder="ИГРОК 1">
+              </div>
+              <div class="panel-group">
+                <div class="panel-body">
+                  <div class="panel panel-default">
+                    <div class="panel-body" id="player1Timer">00 : 00</div>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="panel panel-default">
+                    <div class="panel-body" id="player1Taken">Взятые фигуры</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-12">
+            <div class="panel panel-default" id="player2Panel">
+              <div class="panel-heading">
+                <input type="text" class="form-control" id="player2Name" placeholder="ИГРОК 2">
+              </div>
+              <div class="panel-group">
+                <div class="panel-body">
+                  <div class="panel panel-default">
+                    <div class="panel-body" id="player2Timer">00 : 00</div>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="panel panel-default">
+                    <div class="panel-body" id="player2Taken">Взятые фигуры</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <button type="button" class="btn btn-default btn-lg btn-block">Начать заново!</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="tableWrapper">
+                  <!--<table class="playBoard">
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                      <td>
+                        <div class="filler"></div>
+                      </td>
+                    </tr>
+                  </table>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
