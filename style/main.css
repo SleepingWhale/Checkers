@@ -1,0 +1,74 @@
+#tableWrapper {
+  margin: 10px 10px 10px 10px;
+  border: 1px solid #d9edf7;
+}
+
+#showMessage {
+  height: 100px;
+  text-align: center;
+  display: none;
+}
+
+.playBoard {
+  width: 100%;
+}
+
+.playBoard td {
+  background-color: white;
+  empty-cells: show;
+  position: relative;
+}
+
+.playBoard tr:nth-child(1) td::after {
+  content: attr(letter-sign);
+  position: absolute;
+  top: -18px;
+  left: 50%;
+}
+
+.playBoard tr td:nth-child(1)::before {
+  content: attr(numeric-sign);
+  position: absolute;
+  left: -17px;
+  top: 40%;
+}
+
+.playBoard tr:nth-child(2n+1) td:nth-child(2n),
+.playBoard tr:nth-child(2n) td:nth-child(2n+1) {
+  background-color: #d9edf7;
+}
+
+.filler {
+  position: relative;
+}
+
+.figureRegular {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  padding-bottom: 80%;
+}
+
+.figureSelected {
+  box-shadow: 7px 7px 5px 0 rgba(50, 50, 50, 0.75);
+}
+
+.figureWhite {
+  background: #f0ad4e;
+  border: 1px solid #f0ad4e;
+}
+
+.figureBlack {
+  background: #6E6E6E;
+  border: 1px solid #6E6E6E;
+}
+
+.figureSuper {
+  background-image: url(../img/s.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% auto;
+}
