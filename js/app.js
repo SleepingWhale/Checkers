@@ -201,6 +201,7 @@ function PlayRoom() {
   this.totalScoreElement = document.getElementById('totalScore');
   this.tableSpace = document.getElementById('tableWrapper');
   this.resetElement = document.getElementById('reset');
+  this.boardBGElement = document.getElementById('boardBG');
 }
 
 PlayRoom.prototype.tick = function() {
@@ -231,6 +232,11 @@ PlayRoom.prototype.switchPlayers = function() {
   this.currentPlayer.panelElement.className = 'panel panel-default';
   this.otherPlayer = [this.currentPlayer, this.currentPlayer = this.otherPlayer][0];
   this.currentPlayer.panelElement.className = 'panel panel-primary';
+  if(this.currentPlayer.color){
+    this.boardBGElement.className = this.boardBGElement.className.replace(' up', ' down');
+  } else {
+    this.boardBGElement.className = this.boardBGElement.className.replace(' down', ' up');
+  }
   this.startStopwatch();
 };
 
