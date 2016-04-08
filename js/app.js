@@ -232,7 +232,7 @@ PlayRoom.prototype.switchPlayers = function() {
   this.currentPlayer.panelElement.className = 'panel panel-default';
   this.otherPlayer = [this.currentPlayer, this.currentPlayer = this.otherPlayer][0];
   this.currentPlayer.panelElement.className = 'panel panel-primary';
-  if(this.currentPlayer.color){
+  if (this.currentPlayer.color) {
     this.boardBGElement.className = this.boardBGElement.className.replace(' up', ' down');
   } else {
     this.boardBGElement.className = this.boardBGElement.className.replace(' down', ' up');
@@ -425,7 +425,17 @@ Game.prototype.isKing = function(figure) {
 };
 
 Game.prototype.isWinner = function() {
-  if (Object.getOwnPropertyNames(this.possibleMoves).length === 0) {
+  var gameOver = true,
+    move;
+  if (Object.getOwnPropertyNames(this.possibleMoves).length > 0) {
+    for (move in this.possibleMoves) {
+      if (this.possibleMoves[move]) {
+        gameOver = false;
+      }
+    }
+  }
+
+  if (gameOver) {
     room.setTotalScore(true);
     room.stopStopwatch.call(room);
     room.showMessage('У нас есть победитель: "' + room.otherPlayer.name + '". Нажать здесь для начала новой партии.', room.gameReloading);
