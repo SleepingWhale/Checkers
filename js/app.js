@@ -1,4 +1,4 @@
-(function(){
+//(function(){
 // game board constructor
 function Board(side) {
   this.side = side;
@@ -600,4 +600,4 @@ Game.prototype.move = function(e) {
 var game;
 var room = new PlayRoom();
 room.start();
-})();
+//})();
