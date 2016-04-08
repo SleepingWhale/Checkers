@@ -1,4 +1,4 @@
-//(function(){
+(function(){
 // game board constructor
 function Board(side) {
   this.side = side;
@@ -374,7 +374,7 @@ function Game() {
 
 Game.prototype.init = function(el) {
   var i, j, o, figureBlack, figureWhite,
-    figureRows = 1;
+    figureRows = 3;
   this.board = new Board(8);
   this.board.drawBoard(el);
   this.board.boardElement.addEventListener('click', this.move.bind(this), false);
@@ -600,4 +600,4 @@ Game.prototype.move = function(e) {
 var game;
 var room = new PlayRoom();
 room.start();
-//})();
+})();
